@@ -42,7 +42,12 @@ public class AdminLoginController {
             modelMap.addAttribute("message", "Invalid username or password");
             return new ModelAndView("admin/accounts/login", modelMap);
         }
+        Object ruri = session.getAttribute("redirect-uri");
+        if (ruri != null){
+            session.removeAttribute("redirect-uri");
+            return new ModelAndView("redirect" + ruri);
+        }
         session.setAttribute("username", account.getUsername());
-        return new ModelAndView("forward:admin/categories", modelMap);
+        return new ModelAndView("forward:admin/products", modelMap);
     }
 }
