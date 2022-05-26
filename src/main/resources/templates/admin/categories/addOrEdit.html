@@ -17,7 +17,7 @@
                     </div>
                     <div class="card-body">
                         <div class="form-group">
-                            <label for="categoryId">Category Id:</label>
+                            <label for="">Category Id:</label>
                             <input type="hidden" th:field = "*{isEdit}">
                             <input type="text" class="form-control" th:field="*{categoryId}" aria-describedby="categoryHId" placeholder="Category Id" readonly>
                             <small th:if ="${#fields.hasErrors('categoryId')}"

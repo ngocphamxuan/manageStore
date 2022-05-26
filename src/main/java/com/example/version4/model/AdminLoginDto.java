@@ -11,12 +11,14 @@ import java.io.Serializable;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class CategoryDto implements Serializable {
-
-    private Long categoryId;
-
+public class AdminLoginDto implements Serializable {
     @NotEmpty
-    @Length(min = 5)
-    private String name;
-    private Boolean isEdit = false;
+
+    private String username;
+    @NotEmpty
+
+    private String password;
+
+    private Boolean rememberMe = false;
+
 }

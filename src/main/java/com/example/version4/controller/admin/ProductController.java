@@ -4,7 +4,6 @@ package com.example.version4.controller.admin;
 
 import com.example.version4.domain.Category;
 import com.example.version4.domain.Product;
-import com.example.version4.domain.Product;
 import com.example.version4.model.CategoryDto;
 import com.example.version4.model.ProductDto;
 import com.example.version4.service.CategoryService;
@@ -17,7 +16,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -150,56 +148,56 @@ public class ProductController {
         return "admin/products/list";
     }
 
-    @GetMapping("search")
-    public String search(ModelMap modelMap, @RequestParam(name = "name", required = false) String name) {
-        List<Product> list = null;
-        if(StringUtils.hasText(name)){
-            //list = productService.findByNameContaining(name);
-        }
-        else {
-            list = productService.findAll();
-        }
-        modelMap.addAttribute("categories", list);
-        return "admin/products/search";
-    }
+//    @GetMapping("search")
+//    public String search(ModelMap modelMap, @RequestParam(name = "name", required = false) String name) {
+//        List<Product> list = null;
+//        if(StringUtils.hasText(name)){
+//            //list = productService.findByNameContaining(name);
+//        }
+//        else {
+//            list = productService.findAll();
+//        }
+//        modelMap.addAttribute("categories", list);
+//        return "admin/products/search";
+//    }
 
-    @GetMapping("searchpaginated")
-    public String search(ModelMap modelMap,
-                         @RequestParam(name = "name", required = false) String name,
-                         @RequestParam(name = "page", required = false) Optional<Integer> page,
-                         @RequestParam(name = "size", required = false) Optional<Integer> size) {
-        int currentPage = page.orElse(1);
-        int pageSize = size.orElse(5);
-        Pageable pageable = PageRequest.of(currentPage - 1, pageSize);
-
-        Page<Product> resultPage = null;
-
-        if(StringUtils.hasText(name)){
-            //resultPage = productService.findByNameContaining(name, pageable);
-            modelMap.addAttribute("name", name);
-        }
-        else {
-            resultPage = productService.findAll(pageable);
-        }
-
-        int totalPages = resultPage.getTotalPages();
-
-        if(totalPages>0) {
-            int start = Math.max(1, currentPage-2);
-            int end = Math.min(currentPage+2, totalPages);
-
-            if(totalPages>5) {
-                if(end == totalPages) start = end -5;
-                else if (start==1) end = start +5;
-
-            }
-            List<Integer> pageNumbers = IntStream.rangeClosed(start, end).boxed().collect(Collectors.toList());
-            modelMap.addAttribute("pageNumbers", pageNumbers);
-        }
-
-        modelMap.addAttribute("categoryPage", resultPage);
-        return "admin/categories/searchpaginated";
-    }
+//    @GetMapping("searchpaginated")
+//    public String search(ModelMap modelMap,
+//                         @RequestParam(name = "name", required = false) String name,
+//                         @RequestParam(name = "page", required = false) Optional<Integer> page,
+//                         @RequestParam(name = "size", required = false) Optional<Integer> size) {
+//        int currentPage = page.orElse(1);
+//        int pageSize = size.orElse(5);
+//        Pageable pageable = PageRequest.of(currentPage - 1, pageSize);
+//
+//        Page<Product> resultPage = null;
+//
+//        if(StringUtils.hasText(name)){
+//            //resultPage = productService.findByNameContaining(name, pageable);
+//            modelMap.addAttribute("name", name);
+//        }
+//        else {
+//            resultPage = productService.findAll(pageable);
+//        }
+//
+//        int totalPages = resultPage.getTotalPages();
+//
+//        if(totalPages>0) {
+//            int start = Math.max(1, currentPage-2);
+//            int end = Math.min(currentPage+2, totalPages);
+//
+//            if(totalPages>5) {
+//                if(end == totalPages) start = end -5;
+//                else if (start==1) end = start +5;
+//
+//            }
+//            List<Integer> pageNumbers = IntStream.rangeClosed(start, end).boxed().collect(Collectors.toList());
+//            modelMap.addAttribute("pageNumbers", pageNumbers);
+//        }
+//
+//        modelMap.addAttribute("categoryPage", resultPage);
+//        return "admin/categories/searchpaginated";
+//    }
 
 
 
